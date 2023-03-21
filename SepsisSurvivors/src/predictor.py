@@ -1,5 +1,5 @@
 """_summary_ Python Code Sample - Predicting outcome of sepsis (body's extreme response to an infection) 
-using K-nearest neighbors algorithm 
+using a K-nearest neighbors classifier
 
 Please see also original article at https://www.nature.com/articles/s41598-020-73558-3 
 [Chicco, D., Jurman, G. Survival prediction of patients with sepsis from age, sex, and septic episode 
@@ -10,15 +10,13 @@ Data sets and descriptions of data available from UCI Machine Learning repositor
 
 Data sets distributed with following Licence: CC BY 4.0: freedom to share and adapt the material
 
-Returns:
-    _type_: _description_ 
 """
 
 from sklearn.neighbors import KNeighborsClassifier
 import pandas
 
 def main():
-    """_summary_ This function demonstrates use of K nearest neighbours on sample data set, 
+    """_summary_ This function demonstrates use of K nearest neighbours classifier on sample data set, 
     here data set is sepsis survival data retrieved from UCI Machine Learning repository. 
     Features used in data: [[age_years, sex_0male_1female, episode_number, hospital_outcome_1alive_0dead]]
     """
@@ -41,10 +39,9 @@ def main():
     selections = ["", "Small", "Medium", "Large"]
     runTests(patients, stamp, kNearestN, selections[selection])
 
+
 def runTests(patients: pandas.DataFrame, stamp: int, kNearestN: KNeighborsClassifier, filetype: str):
-
     filename = f"results{filetype}Set{str(stamp)}.txt" #file saved in results[dataSet][stamp].txt
-
     testDF = patients.copy()
     testDF = testDF.reset_index()  # making sure indexes pair with number of rows
     incorrectPredictions = 0
@@ -63,6 +60,7 @@ def runTests(patients: pandas.DataFrame, stamp: int, kNearestN: KNeighborsClassi
     with open(filename, "a") as newFile:
         line = f"Incorrect predictions: {incorrectPredictions} out of {len(testDF.index)}"
         newFile.write(line)   
+
 
 import warnings
 import numpy
@@ -87,6 +85,7 @@ def testingPredictions(filename: str, knn: KNeighborsClassifier, input: list, ex
     with open(filename, "a") as newFile:  #  file saved in results[dataSet][stamp].txt
         newFile.write(result)   
     return incorrect    
+
 
 def selectInputFile():
     while(True):
@@ -115,5 +114,6 @@ def parseRow(patient):
         outcome = "survived"
     expected = str(patient[5])    
     return (sex, outcome, expected)
+
 
 main()
