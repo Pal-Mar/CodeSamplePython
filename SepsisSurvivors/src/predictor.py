@@ -37,6 +37,9 @@ def main():
     stamp = int(datetime.timestamp(datetime.now())) # stamp for use in testing output filename
 
     selections = ["", "Small", "Medium", "Large"]
+
+    # This testing is for a larger project to do testing on parameters and k-size
+    # Here tests are simply run for all samples of same data set used to generate classifier
     runTests(patients, stamp, kNearestN, selections[selection])
 
 
